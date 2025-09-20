@@ -9,7 +9,6 @@ from sqlalchemy.orm import Session
 
 router = APIRouter()
 
-
 @router.post("/register")
 def register(user: UserCreate, db: Session = Depends(get_db)):
     db_user = User (
