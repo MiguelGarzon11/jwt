@@ -1,15 +1,11 @@
-from fastapi import APIRouter, Depends, HTTPException, status, Response, Request
+from fastapi import APIRouter, Depends, HTTPException, status, Response
 from sqlalchemy.orm import Session
 from pydantic import BaseModel
 
-from fastapi.security import OAuth2PasswordRequestForm
-from app.core.security import createToken, hash_password, verify_password
-from app.db.schemas import UserCreate
+from app.core.security import createToken, verify_password
 from app.db.session import get_db
 from app.db.models import User
 
-
-from datetime import datetime, timedelta
 
 router = APIRouter()
 
@@ -31,8 +27,8 @@ def login(user: LoginData, response: Response ,db: Session = Depends(get_db)):
             response.set_cookie(
                 key="access_token",
                 value=token,
-                httponly=True,
-                secure=False
+                httponly=False,
+                secure=True
             )
             
             return {
