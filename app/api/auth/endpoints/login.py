@@ -27,8 +27,10 @@ def login(user: LoginData, response: Response ,db: Session = Depends(get_db)):
             response.set_cookie(
                 key="access_token",
                 value=token,
-                httponly=False,
-                secure=True
+                httponly=True,
+                secure=True,
+                samesite="None",
+                path="/"
             )
             
             return {

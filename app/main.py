@@ -1,5 +1,5 @@
 from fastapi import FastAPI
-from app.api.auth.endpoints import login, register
+from app.api.auth.endpoints import login, register, validate, logout
 from app.api.features.endpoints import dashboard
 from fastapi.middleware.cors import CORSMiddleware
 
@@ -21,4 +21,6 @@ app.add_middleware(
 
 app.include_router(login.router, prefix="/auth", tags=["auth"])
 app.include_router(register.router, prefix="/auth", tags=["auth"])
+app.include_router(validate.router, prefix="/auth", tags=["auth"])
+app.include_router(logout.router)
 app.include_router(dashboard.router)
